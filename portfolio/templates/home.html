@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--><html lang="en"> <!--<![endif]-->
+<head>
+    <title>Portfolio | Alexandre Figura</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/headers/header-default.css') }}">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/line-icons/line-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/revolution-slider/rs-plugin/css/settings.css') }}" type="text/css" media="screen">
+    <!--[if lt IE 9]><link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css') }}" type="text/css" media="screen"><![endif]-->
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom.css') }}">
+</head>
+
+<body>
+
+<div class="wrapper">
+    <!--=== Header ===-->
+    <div class="header">
+        <div class="container">
+            <!-- Logo -->
+            <a class="logo" href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='assets/img/logo1-default.png') }}" alt="Logo">
+            </a>
+            <!-- End Logo -->
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <ul class="loginbar pull-right">
+                    <i class="fa fa-linkedin"></i>
+                    <li><a href="//linkedin.com/in/alexandrefigura">Linkedin</a></li>
+                    <li class="topbar-devider"></li>
+                    <i class="fa fa-stack-overflow"></i>
+                    <li><a href="//stackoverflow.com/users/2987526/alexandre-figura">StackOverflow</a></li>
+                    <li class="topbar-devider"></li>
+                    <i class="fa fa-github"></i>
+                    <li><a href="//github.com/alexandre-figura">GitHub</a></li>
+                </ul>
+            </div>
+            <!-- End Topbar -->
+
+            <!-- Toggle get grouped for better mobile display -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <!-- End Toggle -->
+        </div><!--/end container-->
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                {% for page in ['home', 'skills', 'realizations', 'experiences'] %}
+                    <li><a href="{{ url_for(page) }}">{{ page|capitalize }}</a></li>
+                {% endfor %}
+                </ul>
+            </div><!--/end container-->
+        </div><!--/navbar-collapse-->
+    </div>
+    <!--=== End Header ===-->
+
+    <!--=== Slider ===-->
+    <div class="tp-banner-container">
+        <div class="tp-banner">
+            <ul>
+            {% with %}
+            {% set slides = [
+                ('skills', 'Ready for Challenges', 'I am a creative developer with technical <br/>background covering full IT stacks.'),
+                ('realizations', 'Building our Future', 'I am guided by team spirit <br/>to realize innovative products.'),
+                ('experiences', 'Leverage Technology', 'I offer 3+ years of IT experience <br/>to support your business growth.'),
+            ] %}
+            {% for page, caption, slogan in slides %}
+                <!-- SLIDE -->
+                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="{{ page|capitalize }}">
+                    <!-- MAIN IMAGE -->
+                    <img src="{{ url_for('static', filename='img/sliders/' ~ page ~ '.jpg') }}" alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption revolution-ch1 sft start"
+                         data-x="center"
+                         data-hoffset="0"
+                         data-y="100"
+                         data-speed="1500"
+                         data-start="500"
+                         data-easing="Back.easeInOut"
+                         data-endeasing="Power1.easeIn"
+                         data-endspeed="300">
+                        {{ caption }}
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption revolution-ch2 sft"
+                         data-x="center"
+                         data-hoffset="0"
+                         data-y="190"
+                         data-speed="1400"
+                         data-start="2000"
+                         data-easing="Power4.easeOut"
+                         data-endspeed="300"
+                         data-endeasing="Power1.easeIn"
+                         data-captionhidden="off"
+                         style="z-index: 6">
+                        {{ slogan|safe }}
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption sft"
+                         data-x="center"
+                         data-hoffset="0"
+                         data-y="310"
+                         data-speed="1600"
+                         data-start="2800"
+                         data-easing="Power4.easeOut"
+                         data-endspeed="300"
+                         data-endeasing="Power1.easeIn"
+                         data-captionhidden="off"
+                         style="z-index: 6">
+                        <a href="{{ url_for(page) }}" class="btn-u btn-brd btn-brd-hover btn-u-light">Learn More</a>
+                    </div>
+                </li>
+                <!-- END SLIDE -->
+            {% endfor %}
+            {% endwith %}
+            </ul>
+            <div class="tp-bannertimer tp-bottom"></div>
+        </div>
+    </div>
+    <!--=== End Slider ===-->
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="clearfix margin-bottom-30"></div>
+        <div class="shadow-wrapper">
+            <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                <h2>Who is Alexandre Figura?</h2>
+
+                <p>
+                    I am a young engineer, recently graduated and working in the domain of new technologies.
+                    These last are essential to build a modern and connected world.
+                    Their impact extends across multiple areas, including our way of life and our economy.
+                    Therefore, I offer a range of skills at the service of computer science, and propose you
+                    to discover them by browsing through this portfolio.
+                </p>
+            </div>
+        </div>
+    </div><!--/container-->
+    <!-- End Content Part -->
+
+    <!--=== Footer Version 1 ===-->
+    <div class="footer-v1">
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11">
+                        <p>
+                            2015 &copy; Content licensed under the <a href="//creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC</a> license.
+                        </p>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="col-md-1">
+                        <ul class="footer-socials list-inline">
+                            <li>
+                                <a href="//linkedin.com/in/alexandrefigura" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="//stackoverflow.com/users/2987526/alexandre-figura" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="StackOverflow">
+                                    <i class="fa fa-stack-overflow"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="//github.com/alexandre-figura" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="GitHub">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Social Links -->
+                </div>
+            </div>
+        </div><!--/copyright-->
+    </div>
+    <!--=== End Footer Version 1 ===-->
+</div><!--/wrapper-->
+
+<!-- JS Global Compulsory -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/jquery/jquery-migrate.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/back-to-top.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/smoothScroll.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+<!-- JS Customization -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+<!-- JS Page Level -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/revolution-slider.js') }}"></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    App.init();
+    RevolutionSlider.initRSfullWidth();
+});
+</script>
+<!--[if lt IE 9]>
+<script src="{{ url_for('static', filename='assets/plugins/respond.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/plugins/html5shiv.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/plugins/placeholder-IE-fixes.js') }}"></script>
+<![endif]-->
+
+</body>
+</html>

@@ -6,5 +6,5 @@ def test_navigate_through_my_portfolio(browser):
     browser.get(url_for('home', _external=True))
 
     # She notices that the page content mentions that my website is a portfolio.
-    assert "Portfolio" in browser.page_source
-    assert "Alexandre Figura" in browser.page_source
+    assert "Portfolio" in browser.title
+    assert "Alexandre Figura" in browser.title

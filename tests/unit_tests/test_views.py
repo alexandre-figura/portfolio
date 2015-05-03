@@ -1,6 +1,8 @@
-from flask import url_for
+import flask
 
 
-def test_home_page(client):
-    view = client.get(url_for('home'))
-    assert view.status_code == 200
+def test_home_page(app):
+    with app.test_client() as c:
+        rv = c.get('/')
+        assert flask.request.endpoint == 'home'
+    assert rv.status_code == 200

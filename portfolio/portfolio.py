@@ -1,12 +1,24 @@
-import flask
+from flask import Flask, Response, render_template, request
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
+app.config['THEME_ASSETS'] = 'assets'
 
 
 @app.route('/')
 def home():
-    return "Alexandre Figura - Portfolio"
+    return render_template('home.html')
 
 
-if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
+@app.route('/skills/index.html')
+def skills():
+    return "Skills"
+
+
+@app.route('/realizations/index.html')
+def realizations():
+    return "Realizations"
+
+
+@app.route('/experiences/index.html')
+def experiences():
+    return "Experiences"
