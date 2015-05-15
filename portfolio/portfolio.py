@@ -9,16 +9,16 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/skills/index.html')
+@app.route('/skills')
 def skills():
-    return "Skills"
+    return render_template('skills.html')
 
 
-@app.route('/realizations/index.html')
+@app.route('/realizations')
 def realizations():
-    return "Realizations"
+    return render_template('realizations.html')
 
 
-@app.route('/experiences/index.html')
+@app.route('/experiences')
 def experiences():
-    return "Experiences"
+    return render_template('experiences.html')
