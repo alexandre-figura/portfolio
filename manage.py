@@ -5,7 +5,7 @@ import shutil
 import sys
 
 from flask import Response, request, url_for
-from flask_script import Command, Manager, Option
+from flask_script import Command, Manager, Option, Server
 from selenium import webdriver
 from threading import Thread
 
@@ -118,5 +118,6 @@ if __name__ == '__main__':
     logger.addHandler(console)
     logger.setLevel(logging.INFO)
 
+    manager.add_command('runserver', Server(use_debugger=True))
     manager.add_command(UpdateThemeAssets)
     manager.run()
