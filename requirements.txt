@@ -1,1 +1,6 @@
+# Flask
 Flask==0.10.1
+flask-flatpages==0.6
+
+# Misc
+docutils==0.12

@@ -1,4 +1,8 @@
+# Flask specific
+instance/
+
 # Editors
+#  PyCharm
 .idea/
 
 # Byte-compiled / optimized / DLL files
