@@ -1,89 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
+
 {% block content %}
-    <!--=== Slider ===-->
-    <div class="tp-banner-container">
-        <div class="tp-banner">
-            <ul>
-            {% with %}
-            {% set slides = [
-                ('skills', 'Ready for Challenges', 'I am a creative developer with technical <br/>background covering full IT stacks.'),
-                ('realizations', 'Building our Future', 'I am guided by team spirit <br/>to realize innovative products.'),
-                ('experiences', 'Leverage Technology', 'I offer 3+ years of IT experience <br/>to support your business growth.'),
-            ] %}
-            {% for page, caption, slogan in slides %}
-                <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="{{ page|capitalize }}">
-                    <!-- MAIN IMAGE -->
-                    <img src="{{ url_for('static', filename='img/sliders/' ~ page ~ '.jpg') }}" alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+    {% set slides = [
+        ('skills', 'Ready for Challenges', 'I am a creative developer with technical background covering full IT stacks.'),
+        ('realizations', 'Building our Future', 'I am guided by team spirit to realize innovative products.'),
+        ('experiences', 'Leverage Technology', 'I offer 3+ years of IT experience to support your business growth.'),
+    ] %}
 
-                    <div class="tp-caption revolution-ch1 sft start"
-                         data-x="center"
-                         data-hoffset="0"
-                         data-y="100"
-                         data-speed="1500"
-                         data-start="500"
-                         data-easing="Back.easeInOut"
-                         data-endeasing="Power1.easeIn"
-                         data-endspeed="300">
-                        {{ caption }}
-                    </div>
+    <ul class="slider">
+        {% for page, caption, slogan in slides %}
+        <li>
+            <img src="{{ url_for('static', filename='img/sliders/' ~ page ~ '.jpg') }}">
+            <h2>{{ caption }}</h2>
+            <p>{{ slogan }}</p>
+            <a href="{{ url_for(page) }}">Learn More</a>
+        </li>
+        {% endfor %}
+    </ul>
 
-                    <!-- LAYER -->
-                    <div class="tp-caption revolution-ch2 sft"
-                         data-x="center"
-                         data-hoffset="0"
-                         data-y="190"
-                         data-speed="1400"
-                         data-start="2000"
-                         data-easing="Power4.easeOut"
-                         data-endspeed="300"
-                         data-endeasing="Power1.easeIn"
-                         data-captionhidden="off"
-                         style="z-index: 6">
-                        {{ slogan|safe }}
-                    </div>
+    <div class="summary">
+        <h2>Who am I?</h2>
 
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                         data-x="center"
-                         data-hoffset="0"
-                         data-y="310"
-                         data-speed="1600"
-                         data-start="2800"
-                         data-easing="Power4.easeOut"
-                         data-endspeed="300"
-                         data-endeasing="Power1.easeIn"
-                         data-captionhidden="off"
-                         style="z-index: 6">
-                        <a href="{{ url_for(page) }}" class="btn-u btn-brd btn-brd-hover btn-u-light">Learn More</a>
-                    </div>
-                </li>
-                <!-- END SLIDE -->
-            {% endfor %}
-            {% endwith %}
-            </ul>
-            <div class="tp-bannertimer tp-bottom"></div>
-        </div>
+        <p>
+            I am a young engineer, recently graduated and working in the domain of new technologies.
+            These last are essential to build a modern and connected world.
+            Their impact extends across multiple areas, including our way of life and our economy.
+            Therefore, I offer a range of skills at the service of computer science, and propose you
+            to discover them by browsing through this portfolio.
+        </p>
     </div>
-    <!--=== End Slider ===-->
-
-    <!--=== Content Part ===-->
-    <div class="container content">
-        <div class="clearfix margin-bottom-30"></div>
-        <div class="shadow-wrapper">
-            <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-                <h2>Who is Alexandre Figura?</h2>
-
-                <p>
-                    I am a young engineer, recently graduated and working in the domain of new technologies.
-                    These last are essential to build a modern and connected world.
-                    Their impact extends across multiple areas, including our way of life and our economy.
-                    Therefore, I offer a range of skills at the service of computer science, and propose you
-                    to discover them by browsing through this portfolio.
-                </p>
-            </div>
-        </div>
-    </div><!--/container-->
-    <!-- End Content Part -->
 {% endblock content %}

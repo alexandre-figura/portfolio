@@ -1,7 +1,6 @@
-from flask import Flask, Response, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
-app.config['THEME_ASSETS'] = 'assets'
 
 
 @app.route('/')
