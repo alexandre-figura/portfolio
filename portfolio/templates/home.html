@@ -14,12 +14,12 @@
             <img src="{{ url_for('static', filename='img/sliders/' ~ page ~ '.jpg') }}">
             <h2>{{ caption }}</h2>
             <p>{{ slogan }}</p>
-            <a href="{{ url_for(page) }}">Learn More</a>
+            <a href="{{ url_for(page) }}" rel="navigate">Learn More</a>
         </li>
         {% endfor %}
     </ul>
 
-    <div class="summary">
+    <div class="introduction">
         <h2>Who am I?</h2>
 
         <p>
