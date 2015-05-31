@@ -1,5 +1,6 @@
 # Flask
 Flask==0.10.1
+Flask-script==2.0.5
 flask-flatpages==0.6
 
 # Misc

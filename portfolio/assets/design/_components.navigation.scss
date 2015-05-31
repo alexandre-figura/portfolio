@@ -1,0 +1,25 @@
+.navigation {
+    @extend .inuitcss-tabs;
+}
+
+.navigation__item {
+    @extend .inuitcss-tabs__item;
+}
+
+.navigation__link {
+    @extend .inuitcss-tabs__link;
+
+    color: $inuit-base-text-color;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: underline;
+    }
+}
+
+.navigation__link--active {
+    color: blue;
+}

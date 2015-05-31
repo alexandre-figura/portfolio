@@ -1,0 +1,7 @@
+.footer {
+    @include inuit-font-size(12px);
+}
+
+.footer__link {
+    color: $inuit-base-text-color;
+}

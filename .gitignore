@@ -1,9 +1,18 @@
-# Flask specific
-instance/
-
 # Editors
 #  PyCharm
 .idea/
+
+# Static assets
+portfolio/static/css/
+
+# Bower
+bower_components/
+
+# Flask
+instance/
+
+# Sass
+.sass-cache/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

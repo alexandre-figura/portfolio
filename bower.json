@@ -1,0 +1,7 @@
+{
+  "name": "portfolio",
+  "dependencies": {
+    "inuit-starter-kit": "~0.2.9",
+    "inuit-tabs": "~0.2.1"
+  }
+}

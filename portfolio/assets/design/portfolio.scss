@@ -1,0 +1,23 @@
+/* Settings */
+$inuit-namespace: inuitcss-;
+@import "bower_components/inuit-defaults/settings.defaults";
+
+/* Tools */
+@import "bower_components/inuit-functions/tools.functions";
+@import "bower_components/inuit-mixins/tools.mixins";
+
+/* Generic */
+@import "bower_components/inuit-normalize/generic.normalize";
+@import "bower_components/inuit-box-sizing/generic.box-sizing";
+
+/* Base */
+@import "bower_components/inuit-page/base.page";
+@import "base.page";
+
+/* Objects */
+@import "bower_components/inuit-tabs/objects.tabs";
+
+/* Components */
+@import "components.header";
+@import "components.navigation";
+@import "components.footer";

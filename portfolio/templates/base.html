@@ -5,31 +5,21 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} · Alexandre Figura · Portfolio</title>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
     {% block css %}{% endblock %}
 </head>
 <body>
     <div class="header">
-        <a class="title" href="{{ url_for('home') }}" rel="navigate">Alexandre Figura · Portfolio</a>
-
         <ul class="navigation">
             {% for page in ['home', 'skills', 'realizations', 'experiences'] %}
-            {% if page == active_page %}<li class="active">{% else %}<li>{% endif %}
-                <a href="{{ url_for(page) }}" rel="navigate">{{ page|capitalize }}</a>
+            <li class="navigation__item">
+                <a class="navigation__link{% if page == active_page %} navigation__link--active{% endif %}"
+                   href="{{ url_for(page) }}" rel="navigate">
+                    {{ page|capitalize }}
+                </a>
             </li>
             {% endfor %}
-            <li>
-                <ul class="profiles">
-                    <li>
-                        <a href="//linkedin.com/in/alexandrefigura" rel="me">Linkedin</a>
-                    </li>
-                    <li>
-                        <a href="//stackoverflow.com/users/2987526/alexandre-figura" rel="me">StackOverflow</a>
-                    </li>
-                    <li>
-                        <a href="//github.com/alexandre-figura" rel="me">GitHub</a>
-                    </li>
-                </ul>
-            </li>
+
         </ul>
     </div>
 
@@ -38,22 +28,9 @@
     </div>
 
     <div class="footer">
-        <p class="copyright">
-            2015 © Content licensed under the <a href="//creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons BY-NC</a> license.
+        <p>
+            2015 © Content licensed under the <a class="footer__link" href="//creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons BY-NC</a> license.
         </p>
-
-        <ul class="acknowledgements">
-            <li>
-                <a href="//python.org/" rel="related">
-                    <img src="{{ url_for('static', filename='img/badges/python.png') }}">
-                </a>
-            </li>
-            <li>
-                <a href="//flask.pocoo.org/" rel="related">
-                    <img src="{{ url_for('static', filename='img/badges/flask.png') }}">
-                </a>
-            </li>
-        </ul>
     </div>
 
 {% block javascript %}{% endblock %}

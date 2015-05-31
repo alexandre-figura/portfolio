@@ -2,23 +2,6 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    {% set slides = [
-        ('skills', 'Ready for Challenges', 'I am a creative developer with technical background covering full IT stacks.'),
-        ('realizations', 'Building our Future', 'I am guided by team spirit to realize innovative products.'),
-        ('experiences', 'Leverage Technology', 'I offer 3+ years of IT experience to support your business growth.'),
-    ] %}
-
-    <ul class="slider">
-        {% for page, caption, slogan in slides %}
-        <li>
-            <img src="{{ url_for('static', filename='img/sliders/' ~ page ~ '.jpg') }}">
-            <h2>{{ caption }}</h2>
-            <p>{{ slogan }}</p>
-            <a href="{{ url_for(page) }}" rel="navigate">Learn More</a>
-        </li>
-        {% endfor %}
-    </ul>
-
     <div class="introduction">
         <h2>Who am I?</h2>
 
