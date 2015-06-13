@@ -5,10 +5,9 @@ import threading
 
 from flask_script import Manager, Server
 
-from portfolio import utils
-from portfolio.portfolio import app
+from portfolio.utils import create_app
 
-manager = Manager(app)
+manager = Manager(create_app())
 
 
 class RunServer(Server):

@@ -1,7 +1,20 @@
 import subprocess
 
-from portfolio import utils
 import pytest
+
+import portfolio
+from portfolio import utils
+
+
+def test_application_factory():
+    app = utils.create_app(CONFIG_KEY_1='key1', CONFIG_KEY_2='key2')
+
+    # Extensions must be initialized.
+    assert portfolio.pages.app is app
+
+    # Custom configuration must be handled.
+    assert app.config['CONFIG_KEY_1'] == 'key1'
+    assert app.config['CONFIG_KEY_2'] == 'key2'
 
 
 class TestWatchSassStylesheets:

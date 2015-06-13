@@ -1,9 +1,9 @@
 import pytest
 
-from portfolio import portfolio
+from portfolio.utils import create_app
 
 
 @pytest.fixture
 def app():
-    portfolio.app.config['TESTING'] = True
-    return portfolio.app
+    instance = create_app(TESTING=True)
+    return instance
