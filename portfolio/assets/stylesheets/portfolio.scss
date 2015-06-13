@@ -1,6 +1,7 @@
 /* Settings */
 $inuit-namespace: inuitcss-;
 @import "bower_components/inuit-defaults/settings.defaults";
+@import "settings.global";
 
 /* Tools */
 @import "bower_components/inuit-functions/tools.functions";
