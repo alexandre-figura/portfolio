@@ -1,25 +1,35 @@
 from flask import url_for
 
 
-def test_home_page(client):
-    page = client.get(url_for('website.home'))
-    assert "Home" in page.html.title.string
-    assert page.status_int == 200
+class TestHomePage:
+    def test_all_jobs_are_listed(self, client):
+        page = client.get(url_for('website.home'))
+        current_jobs = [
+            job.text.strip()
+            for job in page.lxml.xpath('//a[@class="job__link"]')
+        ]
+        expected_jobs = [
+            'Position {} at Company {}'.format(position, company)
+            for company in range(1, 3) for position in range(1, 3)
+        ]
+        assert current_jobs == expected_jobs
+
+    def test_all_social_profiles_are_listed(self, client):
+        page = client.get(url_for('website.home'))
+        social_profiles = [link.text.strip()
+                           for link in page.lxml.xpath('//a[@rel="me"]')]
+        assert social_profiles == ['Profile 1', 'Profile 2']
 
 
-def test_skills_page(client):
-    page = client.get(url_for('website.skills'))
-    assert "Skills" in page.html.title.string
-    assert page.status_int == 200
+def test_all_projects_are_listed_on_projects_page(client):
+    page = client.get(url_for('website.projects'))
+    projects = [project.text.strip()
+                for project in page.lxml.xpath('//a[@class="project__link"]')]
+    assert projects == ['Project 2', 'Project 1']
 
 
-def test_realizations_page(client):
-    page = client.get(url_for('website.realizations'))
-    assert "Realizations" in page.html.title.string
-    assert page.status_int == 200
-
-
-def test_experiences_page(client):
-    page = client.get(url_for('website.experiences'))
-    assert "Experiences" in page.html.title.string
-    assert page.status_int == 200
+def test_all_tags_are_listed_on_tags_page(client):
+    page = client.get(url_for('website.tags'))
+    tags = [tag.text.strip()
+            for tag in page.lxml.xpath('//a[@class="tag__link"]')]
+    assert tags == ['Tag 1', 'Tag 2', 'Tag 3']
