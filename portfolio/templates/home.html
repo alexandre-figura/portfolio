@@ -3,14 +3,33 @@
 
 {% block content %}
     <div class="introduction">
-        <h2>Who am I?</h2>
+        {{ about }}
 
-        <p>
-            I am a young engineer, recently graduated and working in the domain of new technologies.
-            These last are essential to build a modern and connected world.
-            Their impact extends across multiple areas, including our way of life and our economy.
-            Therefore, I offer a range of skills at the service of computer science, and propose you
-            to discover them by browsing through this portfolio.
-        </p>
+        <ul class="social_profiles">
+            {% for profile, url in about.profiles|dictsort %}
+            <li class="social__item">
+                <a class="social__link" rel="me" href="{{ url }}">
+                    {{ profile }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h2>Career evolution</h2>
+        {{ career }}
+
+        <ul class="jobs">
+            {% for job in career.jobs %}
+            <li class="job__item">
+                <h3>
+                    <a class="job__link" href="{{ job.url }}">
+                        {{ job.position.name }} at {{ job.company.name }}
+                    </a>
+                </h3>
+                {{ job.summary }}
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock content %}

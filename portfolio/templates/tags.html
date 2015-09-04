@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+{% set active_page = 'tags' %}
+{% block title %}Tags{% endblock %}
+
+{% block content %}
+<ul class="tags">
+    {% for tag in tags %}
+    <li class="tag__item">
+        <a class="tag__link">
+            {{ tag.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -11,7 +11,7 @@
 <body>
     <div class="header">
         <ul class="navigation">
-            {% for page in ['home', 'skills', 'realizations', 'experiences'] %}
+            {% for page in ['home', 'projects', 'tags'] %}
             <li class="navigation__item">
                 <a class="navigation__link{% if page == active_page %} navigation__link--active{% endif %}"
                    href="{{ url_for('.' ~ page) }}" rel="navigate">
