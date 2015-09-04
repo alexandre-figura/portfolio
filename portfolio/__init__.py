@@ -1,3 +1,3 @@
-from flask_flatpages import FlatPages
+from .utils import ExtendedFlatPages
 
-pages = FlatPages()
+pages = ExtendedFlatPages()

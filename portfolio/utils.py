@@ -1,43 +1,38 @@
+from docutils.core import publish_parts
 import subprocess
 
-from flask import Flask
-import jinja2
-from werkzeug.datastructures import ImmutableDict
-
-from . import pages
+from flask_flatpages import FlatPages
 
 
-def create_app(**kwargs):
-    """Initialize and configure a Flask application from the given keyword arguments.
+class ExtendedFlatPages(FlatPages):
+    def get(self, path, *args, **kwargs):
+        if path.endswith('*'):
+            path = path[:-1]
+            pages = [page
+                     for page_path, page in self._pages.items()
+                     if page_path.startswith(path)]
+            return pages
+        return super().get(path, *args, **kwargs)
 
-    :return: the configured Flask application.
-    """
-    # Initialize and configure Flask application.
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object('portfolio.default_settings')
-    app.config.from_pyfile('portfolio.cfg', silent=True)
-    app.config.update(kwargs)
 
-    # In order to not partially render content of web pages,
-    # the template engine must raise an exception for undefined variables.
-    app.jinja_options = ImmutableDict(undefined=jinja2.StrictUndefined, **app.jinja_options)
+def get_url_from_name(name):
+    url = name.lower().replace(' ', '_')
+    return url
 
-    # Initialize extensions.
-    pages.init_app(app)
 
-    # Register Blueprints.
-    from portfolio.views import website
-    app.register_blueprint(website)
-
-    return app
+def rst_to_html(text):
+    return publish_parts(text, writer_name='html')['html_body']
 
 
 def watch_sass_stylesheets(sass_folder, css_folder, output_style='expanded'):
-    """Run the Sass watcher to automatically update CSS stylesheets from their Sass sources.
+    """Run the Sass watcher to automatically update CSS stylesheets
+    from their Sass sources.
 
     :param sass_folder: folder path where are stored the Sass source files.
-    :param css_folder: folder path where will be generated the CSS stylesheets.
-    :param output_style: the style (e.g., expanded, compressed) used by Sass to generate the CSS stylesheet.
+    :param css_folder: folder path where will be generated the CSS
+                       stylesheets.
+    :param output_style: the style (e.g., expanded, compressed) used by Sass
+                         to generate the CSS stylesheet.
     :raise FileNotFoundError: when the Sass program is not installed.
     """
     try:
