@@ -1,6 +1,8 @@
 # Editors
 #  PyCharm
 .idea/
+# ViM
+*.swp
 
 # Static assets
 portfolio/static/css/
