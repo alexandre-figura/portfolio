@@ -7,6 +7,13 @@ from .utils import get_url
 
 
 class ExtendedFlatPages(FlatPages):
+    def get(self, path, *args, **kwargs):
+        if path.endswith('/'):
+            pages = [page for page_path, page in self._pages.items()
+                     if page_path.startswith(path)]
+            return pages
+        return super().get(path, *args, **kwargs)
+
     def _get_page_url(self, page):
         pages = self._pages
 
