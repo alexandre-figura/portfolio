@@ -10,30 +10,14 @@ def test_convert_rst_document_to_html():
     assert '<p>test</p>' in html
 
 
-class TestGetUrlFromName:
+class TestGetUrl:
     def test_caracters_are_converted_to_lowercase(self):
-        name = 'ITEM'
-        current_url = utils.get_url_from_name(name)
-        expected_url = 'item'
-        assert current_url == expected_url
+        url = utils.get_url('TEXT')
+        assert url == 'text'
 
     def test_spaces_are_replaced_by_underscores(self):
-        name = 'item name'
-        current_url = utils.get_url_from_name(name)
-        expected_url = 'item_name'
-        assert current_url == expected_url
-
-
-class TestExtendedFlatPages:
-    def test_get_pages_without_wildcard_in_path(self, app):
-        page = utils.ExtendedFlatPages(app).get('projects/project 1')
-        assert page.path == 'projects/project 1'
-
-    def test_get_pages_with_wildcard_in_path(self, app):
-        pages = utils.ExtendedFlatPages(app).get('projects/*')
-        current_paths = sorted(page.path for page in pages)
-        expected_paths = ['projects/project {}'.format(i) for i in range(1, 3)]
-        assert current_paths == expected_paths
+        url = utils.get_url('text space')
+        assert url == 'text_space'
 
 
 class TestWatchSassStylesheets:

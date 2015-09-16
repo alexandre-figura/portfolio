@@ -1,23 +1,9 @@
 from docutils.core import publish_parts
 import subprocess
 
-from flask_flatpages import FlatPages
 
-
-class ExtendedFlatPages(FlatPages):
-    def get(self, path, *args, **kwargs):
-        if path.endswith('*'):
-            path = path[:-1]
-            pages = [page
-                     for page_path, page in self._pages.items()
-                     if page_path.startswith(path)]
-            return pages
-        return super().get(path, *args, **kwargs)
-
-
-def get_url_from_name(name):
-    url = name.lower().replace(' ', '_')
-    return url
+def get_url(text):
+    return text.lower().replace(' ', '_')
 
 
 def rst_to_html(text):

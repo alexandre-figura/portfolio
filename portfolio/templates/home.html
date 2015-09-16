@@ -20,14 +20,14 @@
         {{ career }}
 
         <ul class="jobs">
-            {% for job in career.jobs %}
+            {% for job in jobs %}
             <li class="job__item">
                 <h3>
                     <a class="job__link" href="{{ job.url }}">
                         {{ job.position.name }} at {{ job.company.name }}
                     </a>
                 </h3>
-                {{ job.summary }}
+                {{ job.position.summary }}
             </li>
             {% endfor %}
         </ul>

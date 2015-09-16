@@ -4,14 +4,10 @@ from flask import url_for
 class TestHomePage:
     def test_all_jobs_are_listed(self, client):
         page = client.get(url_for('website.home'))
-        current_jobs = [
-            job.text.strip()
-            for job in page.lxml.xpath('//a[@class="job__link"]')
-        ]
-        expected_jobs = [
-            'Position {} at Company {}'.format(position, company)
-            for company in range(1, 3) for position in range(1, 3)
-        ]
+        current_jobs = [job.text.strip()
+                        for job in page.lxml.xpath('//a[@class="job__link"]')]
+        expected_jobs = ['Chief Technology Officer at WeKnowYouWantIt',
+                         'Software Developer at InDaCloud']
         assert current_jobs == expected_jobs
 
     def test_all_social_profiles_are_listed(self, client):

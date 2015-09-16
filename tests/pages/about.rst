@@ -1,5 +1,5 @@
 profiles:
-    Profile 1: website.social/profile_1
-    Profile 2: website.social/profile_2
+    Profile 1: www.website_1.social/profile
+    Profile 2: www.website_2.social/profile
 
 This is all about me.

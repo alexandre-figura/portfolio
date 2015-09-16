@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, url_for
 
 from . import pages
-from .utils import get_url_from_name
 
 website = Blueprint('website', __name__)
 
@@ -10,16 +9,14 @@ website = Blueprint('website', __name__)
 def home():
     content = {page: pages.get(page) for page in ['about', 'career']}
 
-    for job in content['career']['jobs']:
-        company_id, _ = job['id'].split('/', 1)
-        job['position'] = pages.get('jobs/' + job['id'])
-        job['company'] = pages.get('jobs/companies')[company_id]
-
-        url_parts = {
-            'company': get_url_from_name(job['company']['name']),
-            'position': get_url_from_name(job['position']['name']),
+    content['jobs'] = sorted([
+        {
+            'position': job,
+            'company': pages.get('companies')[job['company']],
+            'url': job['url'],
         }
-        job['url'] = url_for('.job', **url_parts)
+        for job in pages.get('jobs/*')
+    ], key=lambda job: job['position']['period'], reverse=True)
 
     return render_template('home.html', **content)
 

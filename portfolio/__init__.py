@@ -1,3 +1,3 @@
-from .utils import ExtendedFlatPages
+from .flatpages import ExtendedFlatPages
 
 pages = ExtendedFlatPages()
