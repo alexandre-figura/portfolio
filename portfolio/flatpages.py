@@ -26,7 +26,7 @@ class ExtendedFlatPages(FlatPages):
             url = url_for(
                 'website.job', company=company_url, position=position_url)
         else:
-            url = ''
+            url = None
 
         return url
 

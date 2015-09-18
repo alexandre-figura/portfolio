@@ -12,7 +12,11 @@ class TestExtendedFlatPages:
         expected_paths = ['tags/tag {}'.format(i) for i in range(1, 4)]
         assert current_paths == expected_paths
 
-    def test_job_page_has_url_in_meta_properties(self, flatpages):
+    def test_page_with_no_associated_view_has_no_url(self, flatpages):
+        page = flatpages.get('about')
+        assert page['url'] is None
+
+    def test_job_page_has_a_url(self, flatpages):
         page = flatpages.get('jobs/job 1')
         assert page['url'] == url_for(
             'website.job', company='indacloud', position='software_developer')
