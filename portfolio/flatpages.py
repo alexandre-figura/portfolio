@@ -7,12 +7,22 @@ from .utils import get_url
 
 
 class ExtendedFlatPages(FlatPages):
-    def get(self, path, *args, **kwargs):
+    def get(self, path, default=None):
+        if path.startswith('/'):
+            pages = self._urls
+        else:
+            pages = self._pages
+
         if path.endswith('/'):
-            pages = [page for page_path, page in self._pages.items()
-                     if page_path.startswith(path)]
-            return pages
-        return super().get(path, *args, **kwargs)
+            result = [page for page_path, page in pages.items()
+                      if page_path.startswith(path)]
+        else:
+            try:
+                result = pages[path]
+            except KeyError:
+                result = default
+
+        return result
 
     def _get_page_url(self, page):
         pages = self._pages
@@ -36,3 +46,9 @@ class ExtendedFlatPages(FlatPages):
         for page in pages.values():
             page.meta['url'] = self._get_page_url(page)
         return pages
+
+    @cached_property
+    def _urls(self):
+        pages = self._pages
+        return {page.meta['url']: page for page in pages.values()
+                if page.meta['url'] is not None}

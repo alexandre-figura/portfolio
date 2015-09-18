@@ -2,14 +2,25 @@ from flask import url_for
 
 
 class TestExtendedFlatPages:
-    def test_get_single_page(self, flatpages):
+    def test_get_single_page_from_path(self, flatpages):
         page = flatpages.get('tags/tag 1')
         assert page.path == 'tags/tag 1'
 
-    def test_get_multiple_pages(self, flatpages):
+    def test_get_single_page_from_url(self, flatpages):
+        page = flatpages.get(url_for(
+            'website.job', company='indacloud', position='software_developer'))
+        assert page.path == 'jobs/job 1'
+
+    def test_get_multiple_pages_from_path(self, flatpages):
         pages = flatpages.get('tags/')
         current_paths = sorted(page.path for page in pages)
         expected_paths = ['tags/tag {}'.format(i) for i in range(1, 4)]
+        assert current_paths == expected_paths
+
+    def test_get_multiple_pages_from_url(self, flatpages):
+        pages = flatpages.get('/jobs/')
+        current_paths = sorted(page.path for page in pages)
+        expected_paths = ['jobs/job {}'.format(i) for i in range(1, 3)]
         assert current_paths == expected_paths
 
     def test_page_with_no_associated_view_has_no_url(self, flatpages):
