@@ -6,6 +6,7 @@ class TestHomePage:
         page = client.get(url_for('website.home'))
         current_jobs = [job.text.strip()
                         for job in page.lxml.xpath('//a[@class="job__link"]')]
+        # Jobs are sorted in descending chronological order.
         expected_jobs = ['Chief Technology Officer at WeKnowYouWantIt',
                          'Software Developer at InDaCloud']
         assert current_jobs == expected_jobs
@@ -21,6 +22,7 @@ def test_all_projects_are_listed_on_projects_page(client):
     page = client.get(url_for('website.projects'))
     projects = [project.text.strip()
                 for project in page.lxml.xpath('//a[@class="project__link"]')]
+    # Projects are sorted in descending chronological order.
     assert projects == ['Project 2', 'Project 1']
 
 
