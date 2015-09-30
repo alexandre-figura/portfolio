@@ -18,6 +18,32 @@ class TestHomePage:
         assert social_profiles == ['Profile 1', 'Profile 2']
 
 
+class TestJobPage:
+    @staticmethod
+    def find_projects(page):
+        return [project.text.strip()
+                for project in page.lxml.xpath('//a[@class="project__link"]')]
+
+    def test_job_not_found_returns_404(self, client):
+        url = url_for('website.job', company='unknown', position='unknown')
+        page = client.get(url, status='*')
+        assert page.status_code == 404
+
+    def test_projects_are_listed_if_exist(self, client):
+        url = url_for('website.job', company='indacloud',
+                      position='software_developer')
+        page = client.get(url)
+        projects = self.find_projects(page)
+        assert projects == ['Project 1', 'Project 2']
+
+    def test_projects_are_not_listed_if_not_exist(self, client):
+        url = url_for('website.job', company='weknowyouwantit',
+                      position='chief_technology_officer')
+        page = client.get(url)
+        projects = self.find_projects(page)
+        assert projects == []
+
+
 def test_all_projects_are_listed_on_projects_page(client):
     page = client.get(url_for('website.projects'))
     projects = [project.text.strip()

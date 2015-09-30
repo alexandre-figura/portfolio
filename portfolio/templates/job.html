@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% block title %}
+    {{ job.position.name }} at {{ job.company.name }}
+{% endblock %}
+
+{% block content %}
+    {% if projects %}
+    <h2>Related projects</h2>
+    <ul class="projects">
+        {% for project in projects %}
+        <li class="project__item">
+            <a class="project__link" href="{{ project.url }}">
+                {{ project.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, request, render_template, url_for
 
 from . import pages
 
@@ -23,7 +23,17 @@ def home():
 
 @website.route('/jobs/<company>/<position>')
 def job(company, position):
-    return ""
+    position = pages.get_or_404(request.path)
+
+    job = {
+        'position': position,
+        'company': pages.get('companies')[position['company']]}
+    projects = [
+        pages.get('projects/' + project)
+        for project in position.meta.get('projects', tuple())]
+
+    content = {'job': job, 'projects': projects}
+    return render_template('job.html', **content)
 
 
 @website.route('/projects')
