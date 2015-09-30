@@ -10,13 +10,13 @@ def test_convert_rst_document_to_html():
     assert '<p>test</p>' in html
 
 
-class TestGetUrl:
+class TestNormalize:
     def test_caracters_are_converted_to_lowercase(self):
-        url = utils.get_url('TEXT')
+        url = utils.normalize('TEXT')
         assert url == 'text'
 
     def test_spaces_are_replaced_by_underscores(self):
-        url = utils.get_url('text space')
+        url = utils.normalize('text space')
         assert url == 'text_space'
 
 

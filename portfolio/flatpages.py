@@ -3,7 +3,7 @@ from flask import url_for
 from flask_flatpages import FlatPages
 from werkzeug.utils import cached_property
 
-from .utils import get_url
+from .utils import normalize
 
 
 class ExtendedFlatPages(FlatPages):
@@ -30,8 +30,8 @@ class ExtendedFlatPages(FlatPages):
         if page.path.startswith('jobs/'):
             company_id = page['company']
             company_name = pages['companies'][company_id]['name']
-            company_url = get_url(company_name)
-            position_url = get_url(page['name'])
+            company_url = normalize(company_name)
+            position_url = normalize(page.meta['name'])
 
             url = url_for(
                 'website.job', company=company_url, position=position_url)
