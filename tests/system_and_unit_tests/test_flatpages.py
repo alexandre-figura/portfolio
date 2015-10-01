@@ -31,3 +31,8 @@ class TestExtendedFlatPages:
         page = flatpages.get('jobs/job 1')
         assert page['url'] == url_for(
             'website.job', company='indacloud', position='software_developer')
+
+    def test_project_page_has_a_url(self, flatpages):
+        page = flatpages.get('projects/project 1')
+        assert page['url'] == url_for(
+            'website.project', project='development_of_a_nextgen_website')

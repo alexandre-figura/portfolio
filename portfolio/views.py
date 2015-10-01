@@ -44,6 +44,11 @@ def projects():
     return render_template('projects.html', **content)
 
 
+@website.route('/projects/<project>')
+def project(project):
+    return ""
+
+
 @website.route('/tags')
 def tags():
     tags = sorted(pages.get('tags/'), key=lambda p: p['name'])

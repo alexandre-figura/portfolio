@@ -32,9 +32,11 @@ class ExtendedFlatPages(FlatPages):
             company_name = pages['companies'].meta[company_id]['name']
             company_url = normalize(company_name)
             position_url = normalize(page.meta['name'])
-
             url = url_for(
                 'website.job', company=company_url, position=position_url)
+        elif page.path.startswith('projects/'):
+            project_url = normalize(page.meta['name'])
+            url = url_for('website.project', project=project_url)
         else:
             url = None
 

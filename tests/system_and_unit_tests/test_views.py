@@ -45,6 +45,13 @@ class TestJobPage:
         assert projects == []
 
 
+def test_get_project_page(client):
+    url = url_for('website.project',
+                  project='development_of_a_nextgen_website')
+    page = client.get(url)
+    assert page.status_code == 200
+
+
 def test_all_projects_are_listed_on_projects_page(client):
     page = client.get(url_for('website.projects'))
     projects = [project.text.strip()
