@@ -28,8 +28,8 @@ class ExtendedFlatPages(FlatPages):
         pages = self._pages
 
         if page.path.startswith('jobs/'):
-            company_id = page['company']
-            company_name = pages['companies'][company_id]['name']
+            company_id = page.meta['company']
+            company_name = pages['companies'].meta[company_id]['name']
             company_url = normalize(company_name)
             position_url = normalize(page.meta['name'])
 
