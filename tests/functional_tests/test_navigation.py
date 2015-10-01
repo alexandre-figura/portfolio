@@ -6,13 +6,15 @@ def test_relations_between_content_items(live_server, browser):
     # and is intrigued by a job title:
     # there is currently a similar position to fulfill in her company.
     browser.find_element_by_xpath(
-        "//a[@class='job__link' and contains(text(), 'Position 1 at Company 1')]"
+        "//a[@class='job__link' and contains(text(), 'Software Developer at "
+        "InDaCloud')]"
     ).click()
 
     # On the job page, there is a list of projects I made.
     projects = browser.find_elements_by_class_name('project__link')
-    assert [project.text for project in projects] == ['Project 1', 'Project 2']
-
+    project_names = [project.text for project in projects]
+    assert project_names == ['Development of a nextgen website',
+                             'Modeling the future']
     # One of them looks like a project that her team planned to build
     # during the next quarter.
     projects[0].click()

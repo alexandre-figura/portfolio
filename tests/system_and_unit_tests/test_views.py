@@ -34,7 +34,8 @@ class TestJobPage:
                       position='software_developer')
         page = client.get(url)
         projects = self.find_projects(page)
-        assert projects == ['Project 1', 'Project 2']
+        assert projects == ['Development of a nextgen website',
+                            'Modeling the future']
 
     def test_projects_are_not_listed_if_not_exist(self, client):
         url = url_for('website.job', company='weknowyouwantit',
@@ -49,7 +50,8 @@ def test_all_projects_are_listed_on_projects_page(client):
     projects = [project.text.strip()
                 for project in page.lxml.xpath('//a[@class="project__link"]')]
     # Projects are sorted in descending chronological order.
-    assert projects == ['Project 2', 'Project 1']
+    assert projects == ['Modeling the future',
+                        'Development of a nextgen website']
 
 
 def test_all_tags_are_listed_on_tags_page(client):
