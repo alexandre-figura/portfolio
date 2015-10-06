@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for
+from flask import Blueprint, request, render_template
 
 from . import pages
 
@@ -13,7 +13,7 @@ def home():
         {
             'position': job,
             'company': pages.get('companies')[job['company']],
-            'url': job['url'],
+            'url': job.meta['url'],
         }
         for job in pages.get('jobs/')
     ], key=lambda job: job['position']['period'], reverse=True)
@@ -30,18 +30,16 @@ def job(company, position):
         'company': pages.get('companies')[position['company']]}
     projects = [
         pages.get('projects/' + project)
-        for project in position.meta.get('projects', tuple())]
+        for project in position.meta.get('projects', list())]
 
-    content = {'job': job, 'projects': projects}
-    return render_template('job.html', **content)
+    return render_template('job.html', job=job, projects=projects)
 
 
 @website.route('/projects')
 def projects():
     projects = sorted(pages.get('projects/'),
                       key=lambda p: p['period'][-1], reverse=True)
-    content = {'projects': projects}
-    return render_template('projects.html', **content)
+    return render_template('projects.html', projects=projects)
 
 
 @website.route('/projects/<project>')
@@ -52,5 +50,4 @@ def project(project):
 @website.route('/tags')
 def tags():
     tags = sorted(pages.get('tags/'), key=lambda p: p['name'])
-    content = {'tags': tags}
-    return render_template('tags.html', **content)
+    return render_template('tags.html', tags=tags)
