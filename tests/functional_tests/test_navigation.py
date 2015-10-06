@@ -21,7 +21,7 @@ def test_relations_between_content_items(live_server, browser):
 
     # The project page references the job page, too.
     related_job = browser.find_element_by_class_name('job__link').text
-    assert related_job == 'Job 1'
+    assert related_job == 'Software Developer at InDaCloud'
 
     # The project description goes deeply into details.
     # Hopefully, used technologies are summarized in a list of tags.

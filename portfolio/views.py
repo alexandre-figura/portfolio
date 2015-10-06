@@ -44,7 +44,20 @@ def projects():
 
 @website.route('/projects/<project>')
 def project(project):
-    return ""
+    project = pages.get_or_404(request.path)
+
+    project_id = project.path.split('/')[-1]
+    for page in pages.get('jobs/'):
+        if project_id in page.meta.get('projects', list()):
+            job = {
+                'position': page,
+                'company': pages.get('companies')[page['company']],
+                'url': page.meta['url']}
+            break
+    else:
+        job = None
+
+    return render_template('project.html', project=project, job=job)
 
 
 @website.route('/tags')

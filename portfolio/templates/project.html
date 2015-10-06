@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+    {% if job %}
+    <h2>Related job</h2>
+    <p>
+        <a class="job__link" href="{{ job.url }}">
+            {{ job.position.name }} at {{ job.company.name }}
+        </a>
+    </p>
+    {% endif %}
+{% endblock %}

@@ -45,11 +45,31 @@ class TestJobPage:
         assert projects == []
 
 
-def test_get_project_page(client):
-    url = url_for('website.project',
-                  project='development_of_a_nextgen_website')
-    page = client.get(url)
-    assert page.status_code == 200
+class TestProjectPage:
+    @staticmethod
+    def find_job(page):
+        try:
+            return page.lxml.xpath('//a[@class="job__link"]')[0].text.strip()
+        except IndexError:
+            return None
+
+    def test_project_not_found_returns_404(self, client):
+        url = url_for('website.project', project='unknown')
+        page = client.get(url, status='*')
+        assert page.status_code == 404
+
+    def test_job_is_referenced_if_exists(self, client):
+        url = url_for('website.project',
+                      project='development_of_a_nextgen_website')
+        page = client.get(url)
+        job = self.find_job(page)
+        assert job == 'Software Developer at InDaCloud'
+
+    def test_job_is_not_referenced_if_not_exists(self, client):
+        url = url_for('website.project', project='developed_my_portfolio')
+        page = client.get(url)
+        job = self.find_job(page)
+        assert job is None
 
 
 def test_all_projects_are_listed_on_projects_page(client):
@@ -58,7 +78,8 @@ def test_all_projects_are_listed_on_projects_page(client):
                 for project in page.lxml.xpath('//a[@class="project__link"]')]
     # Projects are sorted in descending chronological order.
     assert projects == ['Modeling the future',
-                        'Development of a nextgen website']
+                        'Development of a nextgen website',
+                        'Developed my portfolio']
 
 
 def test_all_tags_are_listed_on_tags_page(client):
