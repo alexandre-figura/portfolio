@@ -1,2 +1,2 @@
-name: Tag 1
+name: Python Programming Language
 related: [tag 2, tag 3]

@@ -1,2 +1,1 @@
-name: Tag 3
-related: [tag 1, tag 2]
+name: eXtreme Programming Methodology

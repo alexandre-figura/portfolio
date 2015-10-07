@@ -86,4 +86,6 @@ def test_all_tags_are_listed_on_tags_page(client):
     page = client.get(url_for('website.tags'))
     tags = [tag.text.strip()
             for tag in page.lxml.xpath('//a[@class="tag__link"]')]
-    assert tags == ['Tag 1', 'Tag 2', 'Tag 3']
+    # Tags are sorted by alphabetical order (case insensitive).
+    assert tags == ['eXtreme Programming Methodology', 'Flask Web Framework',
+                    'Python Programming Language']

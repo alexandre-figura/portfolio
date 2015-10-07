@@ -26,7 +26,8 @@ def test_relations_between_content_items(live_server, browser):
     # The project description goes deeply into details.
     # Hopefully, used technologies are summarized in a list of tags.
     tags = browser.find_elements_by_class_name('tag__link')
-    assert [tag.text for tag in tags] == ['Tag 1', 'Tag 2']
+    tag_names = [tag.text for tag in tags]
+    assert tag_names == ['Python Programming Language', 'Flask Web Framework']
 
     # Alice notices a cutting edge technology among tags.
     # She wonders if I made other projects with.
