@@ -10,4 +10,17 @@
         </a>
     </p>
     {% endif %}
+
+    {% if tags %}
+    <h2>Tags</h2>
+    <ul class="tags">
+        {% for tag in tags %}
+        <li class="tag__item">
+            <a class="tag__link" href="{{ tag.url }}">
+                {{ tag.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

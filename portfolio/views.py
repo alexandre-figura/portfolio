@@ -57,7 +57,10 @@ def project(project):
     else:
         job = None
 
-    return render_template('project.html', project=project, job=job)
+    tags = [pages.get('tags/' + tag)
+            for tag in project.meta.get('tags', list())]
+
+    return render_template('project.html', project=project, job=job, tags=tags)
 
 
 @website.route('/tags')

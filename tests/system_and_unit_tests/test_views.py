@@ -53,6 +53,11 @@ class TestProjectPage:
         except IndexError:
             return None
 
+    @staticmethod
+    def find_tags(page):
+        return [tag.text.strip()
+                for tag in page.lxml.xpath('//a[@class="tag__link"]')]
+
     def test_project_not_found_returns_404(self, client):
         url = url_for('website.project', project='unknown')
         page = client.get(url, status='*')
@@ -70,6 +75,19 @@ class TestProjectPage:
         page = client.get(url)
         job = self.find_job(page)
         assert job is None
+
+    def test_tags_are_referenced_if_exist(self, client):
+        url = url_for('website.project',
+                      project='development_of_a_nextgen_website')
+        page = client.get(url)
+        tags = self.find_tags(page)
+        assert tags == ['Python Programming Language', 'Flask Web Framework']
+
+    def test_tags_are_not_referenced_if_not_exist(self, client):
+        url = url_for('website.project', project='developed_my_portfolio')
+        page = client.get(url)
+        tags = self.find_tags(page)
+        assert tags == []
 
 
 def test_all_projects_are_listed_on_projects_page(client):
