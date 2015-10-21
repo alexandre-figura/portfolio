@@ -46,11 +46,13 @@ class ExtendedFlatPages(FlatPages):
     def _pages(self):
         pages = super()._pages
         for page in pages.values():
-            page.meta['url'] = self._get_page_url(page)
+            url = self._get_page_url(page)
+            if url is not None:
+                page.meta['url'] = url
         return pages
 
     @cached_property
     def _urls(self):
         pages = self._pages
         return {page.meta['url']: page for page in pages.values()
-                if page.meta['url'] is not None}
+                if 'url' in page.meta}

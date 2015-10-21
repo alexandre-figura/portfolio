@@ -25,14 +25,14 @@ class TestExtendedFlatPages:
 
     def test_page_with_no_associated_view_has_no_url(self, flatpages):
         page = flatpages.get('about')
-        assert page['url'] is None
+        assert 'url' not in page.meta
 
     def test_job_page_has_a_url(self, flatpages):
         page = flatpages.get('jobs/job 1')
-        assert page['url'] == url_for(
+        assert page.meta['url'] == url_for(
             'website.job', company='indacloud', position='software_developer')
 
     def test_project_page_has_a_url(self, flatpages):
         page = flatpages.get('projects/project 1')
-        assert page['url'] == url_for(
+        assert page.meta['url'] == url_for(
             'website.project', project='development_of_a_nextgen_website')
