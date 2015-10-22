@@ -90,6 +90,12 @@ class TestProjectPage:
         assert tags == []
 
 
+def test_tag_page_returns_200_status_code(client):
+    url = url_for('website.tag', tag='python_programming_language')
+    page = client.get(url)
+    assert page.status_code == 200
+
+
 def test_all_projects_are_listed_on_projects_page(client):
     page = client.get(url_for('website.projects'))
     projects = [project.text.strip()

@@ -36,3 +36,8 @@ class TestExtendedFlatPages:
         page = flatpages.get('projects/project 1')
         assert page.meta['url'] == url_for(
             'website.project', project='development_of_a_nextgen_website')
+
+    def test_tag_page_has_a_url(self, flatpages):
+        page = flatpages.get('tags/tag 1')
+        assert page.meta['url'] == url_for(
+            'website.tag', tag='python_programming_language')

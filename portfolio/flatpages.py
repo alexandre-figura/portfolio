@@ -34,9 +34,15 @@ class ExtendedFlatPages(FlatPages):
             position_url = normalize(page.meta['name'])
             url = url_for(
                 'website.job', company=company_url, position=position_url)
+
         elif page.path.startswith('projects/'):
             project_url = normalize(page.meta['name'])
             url = url_for('website.project', project=project_url)
+
+        elif page.path.startswith('tags/'):
+            tag_url = normalize(page.meta['name'])
+            url = url_for('website.tag', tag=tag_url)
+
         else:
             url = None
 

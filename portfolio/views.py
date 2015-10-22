@@ -67,3 +67,8 @@ def project(project):
 def tags():
     tags = sorted(pages.get('tags/'), key=lambda p: p['name'].lower())
     return render_template('tags.html', tags=tags)
+
+
+@website.route('/tags/<tag>')
+def tag(tag):
+    return ''
