@@ -90,10 +90,29 @@ class TestProjectPage:
         assert tags == []
 
 
-def test_tag_page_returns_200_status_code(client):
-    url = url_for('website.tag', tag='python_programming_language')
-    page = client.get(url)
-    assert page.status_code == 200
+class TestTagPage:
+    @staticmethod
+    def find_projects(page):
+        return [project.text.strip()
+                for project in page.lxml.xpath('//a[@class="project__link"]')]
+
+    def test_tag_not_found_returns_404(self, client):
+        url = url_for('website.tag', tag='unknown')
+        page = client.get(url, status='*')
+        assert page.status_code == 404
+
+    def test_projects_are_referenced_if_exist(self, client):
+        url = url_for('website.tag', tag='python_programming_language')
+        page = client.get(url)
+        projects = self.find_projects(page)
+        assert projects == ['Development of a nextgen website',
+                            'Modeling the future']
+
+    def test_projects_are_not_referenced_if_not_exist(self, client):
+        url = url_for('website.tag', tag='extreme_programming_methodology')
+        page = client.get(url)
+        projects = self.find_projects(page)
+        assert projects == []
 
 
 def test_all_projects_are_listed_on_projects_page(client):

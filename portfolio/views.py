@@ -71,4 +71,10 @@ def tags():
 
 @website.route('/tags/<tag>')
 def tag(tag):
-    return ''
+    tag = pages.get_or_404(request.path)
+
+    tag_id = tag.path.split('/')[-1]
+    projects = [project for project in pages.get('projects/')
+                if tag_id in project.meta.get('tags', list())]
+
+    return render_template('tag.html', tag=tag, projects=projects)

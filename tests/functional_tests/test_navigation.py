@@ -38,7 +38,8 @@ def test_relations_between_content_items(live_server, browser):
         project.text
         for project in browser.find_elements_by_class_name('project__link')
     ]
-    assert related_projects == ['Project 1', 'Project 2']
+    assert related_projects == ['Development of a nextgen website',
+                                'Modeling the future']
 
     # Moreover, other tags are associated with the current tag:
     # a good idea to find related technologies.
