@@ -74,7 +74,9 @@ def tag(tag):
     tag = pages.get_or_404(request.path)
 
     tag_id = tag.path.split('/')[-1]
-    projects = [project for project in pages.get('projects/')
-                if tag_id in project.meta.get('tags', list())]
+    projects = sorted((
+        project for project in pages.get('projects/')
+        if tag_id in project.meta.get('tags', list())
+    ), key=lambda p: p['period'][-1], reverse=True)
 
     return render_template('tag.html', tag=tag, projects=projects)

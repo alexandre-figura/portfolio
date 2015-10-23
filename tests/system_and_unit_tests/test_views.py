@@ -105,8 +105,9 @@ class TestTagPage:
         url = url_for('website.tag', tag='python_programming_language')
         page = client.get(url)
         projects = self.find_projects(page)
-        assert projects == ['Development of a nextgen website',
-                            'Modeling the future']
+        # Projects are sorted in descending chronological order.
+        assert projects == ['Modeling the future',
+                            'Development of a nextgen website']
 
     def test_projects_are_not_referenced_if_not_exist(self, client):
         url = url_for('website.tag', tag='extreme_programming_methodology')
