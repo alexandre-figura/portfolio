@@ -1,11 +1,11 @@
 -r requirements.txt
 
 # Pytest
-pytest>=2.7.0
+pytest>=2.8.2
 pytest-flask>=0.8.1
-pytest-mock>=0.6.0
+pytest-mock>=0.8.1
 
 # Misc
 lxml>=3.4.4
-selenium>=2.45.0
+selenium>=2.48.0
 webtest>=2.0.18
