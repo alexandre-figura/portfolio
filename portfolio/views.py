@@ -79,4 +79,7 @@ def tag(tag):
         if tag_id in project.meta.get('tags', list())
     ), key=lambda p: p['period'][-1], reverse=True)
 
-    return render_template('tag.html', tag=tag, projects=projects)
+    tags = [pages.get('tags/' + tag)
+            for tag in tag.meta.get('related', list())]
+
+    return render_template('tag.html', tag=tag, projects=projects, tags=tags)

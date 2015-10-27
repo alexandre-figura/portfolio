@@ -96,6 +96,11 @@ class TestTagPage:
         return [project.text.strip()
                 for project in page.lxml.xpath('//a[@class="project__link"]')]
 
+    @staticmethod
+    def find_related_tags(page):
+        return [tag.text.strip()
+                for tag in page.lxml.xpath('//a[@class="tag__link"]')]
+
     def test_tag_not_found_returns_404(self, client):
         url = url_for('website.tag', tag='unknown')
         page = client.get(url, status='*')
@@ -114,6 +119,19 @@ class TestTagPage:
         page = client.get(url)
         projects = self.find_related_projects(page)
         assert projects == []
+
+    def test_related_tags_are_referenced_if_exist(self, client):
+        url = url_for('website.tag', tag='python_programming_language')
+        page = client.get(url)
+        tags = self.find_related_tags(page)
+        assert tags == ['Flask Web Framework',
+                        'eXtreme Programming Methodology']
+
+    def test_related_tags_are_not_referenced_if_not_exist(self, client):
+        url = url_for('website.tag', tag='flask_web_framework')
+        page = client.get(url)
+        tags = self.find_related_tags(page)
+        assert tags == []
 
 
 def test_all_projects_are_listed_on_projects_page(client):

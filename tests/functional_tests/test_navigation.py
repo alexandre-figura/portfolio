@@ -44,7 +44,9 @@ def test_relations_between_content_items(live_server, browser):
     # Moreover, other tags are associated with the current tag:
     # a good idea to find related technologies.
     related_tags = browser.find_elements_by_class_name('tag__link')
-    assert [tag.text for tag in related_tags] == ['Tag 2', 'Tag 3']
+    tag_names = [tag.text for tag in related_tags]
+    assert tag_names == ['Flask Web Framework',
+                         'eXtreme Programming Methodology']
 
     # The name of one of those tags draws the attention of Alice:
     # she decides to take a look at.
