@@ -8,6 +8,7 @@ class TestHomePage:
                         for job in page.lxml.xpath('//a[@class="job__link"]')]
         # Jobs are sorted in descending chronological order.
         expected_jobs = ['Chief Technology Officer at WeKnowYouWantIt',
+                         'Lead Developer at InDaCloud',
                          'Software Developer at InDaCloud']
         assert current_jobs == expected_jobs
 
@@ -38,8 +39,8 @@ class TestJobPage:
                             'Modeling the future']
 
     def test_related_projects_are_not_listed_if_not_exist(self, client):
-        url = url_for('website.job', company='weknowyouwantit',
-                      position='chief_technology_officer')
+        url = url_for('website.job', company='indacloud',
+                      position='lead_developer')
         page = client.get(url)
         projects = self.find_related_projects(page)
         assert projects == []

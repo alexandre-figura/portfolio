@@ -20,7 +20,7 @@ class TestExtendedFlatPages:
     def test_get_multiple_pages_from_url(self, flatpages):
         pages = flatpages.get('/jobs/')
         current_paths = sorted(page.path for page in pages)
-        expected_paths = ['jobs/job {}'.format(i) for i in range(1, 3)]
+        expected_paths = ['jobs/job {}'.format(i) for i in range(1, 4)]
         assert current_paths == expected_paths
 
     def test_page_with_no_associated_view_has_no_url(self, flatpages):
