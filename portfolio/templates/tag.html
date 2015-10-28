@@ -15,6 +15,19 @@
     </ul>
     {% endif %}
 
+    {% if jobs %}
+    <h2>Jobs</h2>
+    <ul class="jobs">
+        {% for job in jobs %}
+        <li class="job__item">
+            <a class="job__link" href="{{ job.url }}">
+                {{ job.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     {% if tags %}
     <h2>Related tags</h2>
     <ul class="tags">

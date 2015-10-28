@@ -102,6 +102,11 @@ class TestTagPage:
         return [tag.text.strip()
                 for tag in page.lxml.xpath('//a[@class="tag__link"]')]
 
+    @staticmethod
+    def find_related_jobs(page):
+        return [job.text.strip()
+                for job in page.lxml.xpath('//a[@class="job__link"]')]
+
     def test_tag_not_found_returns_404(self, client):
         url = url_for('website.tag', tag='unknown')
         page = client.get(url, status='*')
@@ -132,6 +137,19 @@ class TestTagPage:
         url = url_for('website.tag', tag='flask_web_framework')
         page = client.get(url)
         tags = self.find_related_tags(page)
+        assert tags == []
+
+    def test_related_jobs_are_referenced_if_exist(self, client):
+        url = url_for('website.tag', tag='flask_web_framework')
+        page = client.get(url)
+        tags = self.find_related_jobs(page)
+        # Jobs are sorted in descending chronological order.
+        assert tags == ['Lead Developer', 'Software Developer']
+
+    def test_related_jobs_are_not_referenced_if_not_exist(self, client):
+        url = url_for('website.tag', tag='extreme_programming_methodology')
+        page = client.get(url)
+        tags = self.find_related_jobs(page)
         assert tags == []
 
 

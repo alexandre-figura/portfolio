@@ -86,4 +86,10 @@ def tag(tag):
     tags = [pages.get('tags/' + tag)
             for tag in tag.meta.get('related', list())]
 
-    return render_template('tag.html', tag=tag, projects=projects, tags=tags)
+    jobs = sorted((
+        job for job in pages.get('jobs/')
+        if tag_id in job.meta.get('tags', list())
+    ), key=lambda job: job.meta['period'], reverse=True)
+
+    return render_template('tag.html', tag=tag, projects=projects, tags=tags,
+                           jobs=jobs)

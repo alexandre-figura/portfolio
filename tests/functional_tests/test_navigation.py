@@ -54,7 +54,8 @@ def test_relations_between_content_items(live_server, browser):
 
     # The tag page references a list of related jobs.
     related_jobs = browser.find_elements_by_class_name('job__link')
-    assert [job.text for job in related_jobs] == ['Job 1', 'Job 2']
+    job_names = [job.text for job in related_jobs]
+    assert job_names == ['Lead Developer', 'Software Developer']
 
     # A job of this list is the one with which Alice started her exploration.
     # In fact, if Alice comes back to the job page,
