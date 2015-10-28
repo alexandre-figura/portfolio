@@ -25,6 +25,11 @@ class TestJobPage:
         return [project.text.strip()
                 for project in page.lxml.xpath('//a[@class="project__link"]')]
 
+    @staticmethod
+    def find_related_tags(page):
+        return [tag.text.strip()
+                for tag in page.lxml.xpath('//a[@class="tag__link"]')]
+
     def test_job_not_found_returns_404(self, client):
         url = url_for('website.job', company='unknown', position='unknown')
         page = client.get(url, status='*')
@@ -44,6 +49,20 @@ class TestJobPage:
         page = client.get(url)
         projects = self.find_related_projects(page)
         assert projects == []
+
+    def test_related_tags_are_referenced_if_exist(self, client):
+        url = url_for('website.job', company='indacloud',
+                      position='software_developer')
+        page = client.get(url)
+        tags = self.find_related_tags(page)
+        assert tags == ['Python Programming Language', 'Flask Web Framework']
+
+    def test_related_tags_are_not_referenced_if_not_exist(self, client):
+        url = url_for('website.job', company='weknowyouwantit',
+                      position='chief_technology_officer')
+        page = client.get(url)
+        tags = self.find_related_tags(page)
+        assert tags == []
 
 
 class TestProjectPage:

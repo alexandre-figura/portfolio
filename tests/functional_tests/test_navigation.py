@@ -60,8 +60,9 @@ def test_relations_between_content_items(live_server, browser):
     # A job of this list is the one with which Alice started her exploration.
     # In fact, if Alice comes back to the job page,
     # she can find related tags too. Hence, the loop is completed!
-    related_jobs[0].click()
+    related_jobs[1].click()
     related_tags = [
         tag.text for tag in browser.find_elements_by_class_name('tag__link')
     ]
-    assert related_tags == ['Tag 2', 'Tag 3']
+    assert related_tags == ['Python Programming Language',
+                            'Flask Web Framework']

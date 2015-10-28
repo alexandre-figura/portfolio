@@ -33,8 +33,11 @@ def job(company, position):
     projects = [
         pages.get('projects/' + project)
         for project in position.meta.get('projects', list())]
+    tags = [
+        pages.get('tags/' + tag)
+        for tag in position.meta.get('tags', list())]
 
-    return render_template('job.html', job=job, projects=projects)
+    return render_template('job.html', job=job, projects=projects, tags=tags)
 
 
 @website.route('/projects')
