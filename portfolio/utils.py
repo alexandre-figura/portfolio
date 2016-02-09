@@ -2,7 +2,7 @@ from docutils.core import publish_parts
 import subprocess
 
 
-def normalize(text):
+def normalize_url_part(text):
     return text.lower().replace(' ', '_')
 
 

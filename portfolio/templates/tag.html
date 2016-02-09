@@ -28,13 +28,13 @@
     </ul>
     {% endif %}
 
-    {% if tags %}
+    {% if tag.related %}
     <h2>Related tags</h2>
     <ul class="tags">
-        {% for tag in tags %}
+        {% for related_tag in tag.related %}
         <li class="tag__item">
-            <a class="tag__link" href="{{ tag.url }}">
-                {{ tag.name }}
+            <a class="tag__link" href="{{ related_tag.url }}">
+                {{ related_tag.name }}
             </a>
         </li>
         {% endfor %}

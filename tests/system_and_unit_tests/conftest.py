@@ -1,7 +1,7 @@
 import pytest
 import webtest
 
-from portfolio import ExtendedFlatPages
+from portfolio import PortfolioFlatPages
 
 
 @pytest.fixture
@@ -11,4 +11,4 @@ def client(app):
 
 @pytest.fixture
 def flatpages(app):
-    return ExtendedFlatPages(app)
+    return PortfolioFlatPages(app)

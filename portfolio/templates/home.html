@@ -24,10 +24,10 @@
             <li class="job__item">
                 <h3>
                     <a class="job__link" href="{{ job.url }}">
-                        {{ job.position.name }} at {{ job.company.name }}
+                        {{ job.name }} at {{ job.company.name }}
                     </a>
                 </h3>
-                {{ job.position.summary }}
+                {{ job.summary }}
             </li>
             {% endfor %}
         </ul>

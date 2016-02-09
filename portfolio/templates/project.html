@@ -2,19 +2,19 @@
 {% block title %}{{ project.name }}{% endblock %}
 
 {% block content %}
-    {% if job %}
+    {% if project.job %}
     <h2>Related job</h2>
     <p>
-        <a class="job__link" href="{{ job.url }}">
-            {{ job.position.name }} at {{ job.company.name }}
+        <a class="job__link" href="{{ project.job.url }}">
+            {{ project.job.name }} at {{ project.job.company.name }}
         </a>
     </p>
     {% endif %}
 
-    {% if tags %}
+    {% if project.tags %}
     <h2>Tags</h2>
     <ul class="tags">
-        {% for tag in tags %}
+        {% for tag in project.tags %}
         <li class="tag__item">
             <a class="tag__link" href="{{ tag.url }}">
                 {{ tag.name }}

@@ -1,3 +1,3 @@
-from .flatpages import ExtendedFlatPages
+from .flatpages import PortfolioFlatPages
 
-pages = ExtendedFlatPages()
+pages = PortfolioFlatPages()

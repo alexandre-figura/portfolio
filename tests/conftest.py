@@ -12,6 +12,6 @@ def app():
 
     instance = create_app(
         TESTING=True,
-        FLATPAGES_ROOT=pages_dir,
-    )
+        FLATPAGES_ROOT=pages_dir)
+
     return instance
