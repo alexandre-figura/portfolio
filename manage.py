@@ -1,24 +1,25 @@
 #!/usr/bin/env python
 
-import os.path
-import threading
+from pathlib import PurePath
+from threading import Thread
 
 from flask_script import Manager, Server
 
-from portfolio import helpers, utils
+from portfolio.helpers import create_app
+from portfolio.utils import watch_sass_stylesheets
 
-manager = Manager(helpers.create_app())
+manager = Manager(create_app())
 
 
 class RunServer(Server):
     def __call__(self, app, *args, **kwargs):
-        sass_folder = os.path.join(app.root_path, 'assets', 'stylesheets')
-        css_folder = os.path.join(app.static_folder, 'css')
+        sass_folder = PurePath(app.root_path, 'stylesheets')
+        css_folder = PurePath(app.static_folder, 'css')
 
-        class SassWatcher(threading.Thread):
+        class SassWatcher(Thread):
             def run(self):
                 try:
-                    utils.watch_sass_stylesheets(sass_folder, css_folder)
+                    watch_sass_stylesheets(str(sass_folder), str(css_folder))
                 except FileNotFoundError as e:
                     print(' * {}'.format(e))
                     print(' * Automatic reload of CSS stylesheets is deactivated')  # noqa
