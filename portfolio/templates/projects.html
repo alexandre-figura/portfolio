@@ -6,7 +6,7 @@
 <ul class="projects">
     {% for project in projects %}
     <li class="project__item">
-        <a class="project__link">
+        <a class="project__link" href="{{ project.url }}">
             {{ project.name }}
         </a>
     </li>

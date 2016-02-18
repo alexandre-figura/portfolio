@@ -1,5 +1,5 @@
-from docutils.core import publish_parts
 import subprocess
+from docutils.core import publish_parts
 
 
 def normalize_url_part(text):
